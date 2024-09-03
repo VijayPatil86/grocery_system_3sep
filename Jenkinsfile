@@ -32,7 +32,7 @@ pipeline {
 		}
 		stage ('DOCKER_RUN') {
 		    steps {
-				bat "docker run -v E:/grocery-prod-logs/:/app -p 9002:9002 grocery"
+				bat "docker run -d -v E:/grocery-prod-logs/:/app -p 9002:9002 grocery"
 		    }
 		}
     }
