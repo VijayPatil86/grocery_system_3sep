@@ -9,5 +9,5 @@ import lombok.ToString;
 public class CategoryBean {
 	private int categoryId;
 	private String categoryName;
-	private String categoryVisible;
+	private String categoryAvailable;
 }
