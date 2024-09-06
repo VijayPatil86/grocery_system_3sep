@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.grocery.grocery_web_app.entity.CategoryEntity;
 
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer> {
-	@Query(value = "SELECT c FROM CategoryEntity c WHERE c.categoryVisible = 'Y'")
-	List<CategoryEntity> getAllVisibleCategories();
+	@Query(value = "SELECT c FROM CategoryEntity c WHERE c.categoryAvailable = 'Y'")
+	List<CategoryEntity> getAllAvailableCategories();
 }
