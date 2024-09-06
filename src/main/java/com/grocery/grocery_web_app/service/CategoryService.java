@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.grocery.grocery_web_app.bean.CategoryBean;
 import com.grocery.grocery_web_app.entity.CategoryEntity;
-import com.grocery.grocery_web_app.exception.CategoryException;
+import com.grocery.grocery_web_app.exception.CategoryNotAvailableException;
 import com.grocery.grocery_web_app.repository.CategoryRepository;
 
 @Service
@@ -22,23 +22,23 @@ public class CategoryService {
 	private CategoryRepository categoryRepository;
 
 	@Transactional(readOnly = true)
-	public List<CategoryBean> getAllVisibleCategories() {
-		LOGGER.debug("List<CategoryBean> CategoryService.getAllVisibleCategories() --- START");
-		List<CategoryEntity> allVisibleCategoriesEntities = categoryRepository.getAllVisibleCategories();
-		if(allVisibleCategoriesEntities.size() == 0) {
-			LOGGER.info("List<CategoryBean> CategoryService.getAllVisibleCategories() --- visible Categories not available");
-			throw new CategoryException();
+	public List<CategoryBean> getAllAvailableCategories() {
+		LOGGER.debug("List<CategoryBean> CategoryService.getAllAvailableCategories() --- START");
+		List<CategoryEntity> allAvailableCategoriesEntities = categoryRepository.getAllAvailableCategories();
+		if(allAvailableCategoriesEntities.size() == 0) {
+			LOGGER.info("List<CategoryBean> CategoryService.getAllAvailableCategories() --- available Categories not available");
+			throw new CategoryNotAvailableException(null);
 		}
-		LOGGER.info("List<CategoryBean> CategoryService.getAllVisibleCategories() --- visible Categories entities are: " +
-				allVisibleCategoriesEntities);
-		List<CategoryBean> allVisibleCategoriesBeans = allVisibleCategoriesEntities.stream()
+		LOGGER.info("List<CategoryBean> CategoryService.getAllAvailableCategories() --- available Categories entities are: " +
+				allAvailableCategoriesEntities);
+		List<CategoryBean> allAvailableCategoriesBeans = allAvailableCategoriesEntities.stream()
 				.map(categoryEntity -> CategoryBean.builder()
 						.categoryId(categoryEntity.getCategoryId())
 						.categoryName(categoryEntity.getCategoryName()).build())
 				.collect(Collectors.toList());
-		LOGGER.info("List<CategoryBean> CategoryService.getAllVisibleCategories() --- visible Categories beans are: " +
-				allVisibleCategoriesBeans);
-		LOGGER.debug("List<CategoryBean> CategoryService.getAllVisibleCategories() --- END");
-		return allVisibleCategoriesBeans;
+		LOGGER.info("List<CategoryBean> CategoryService.getAllAvailableCategories() --- available Categories beans are: " +
+				allAvailableCategoriesBeans);
+		LOGGER.debug("List<CategoryBean> CategoryService.getAllAvailableCategories() --- END");
+		return allAvailableCategoriesBeans;
 	}
 }
