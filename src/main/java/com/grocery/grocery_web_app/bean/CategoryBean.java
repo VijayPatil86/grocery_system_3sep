@@ -12,4 +12,5 @@ public class CategoryBean {
 	private int categoryId;
 	private String categoryName;
 	private List<DairyProductBean> dairyProductBeans;
+	private List<BakeryProductBean> bakeryProductBeans;
 }
