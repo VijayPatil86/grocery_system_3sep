@@ -38,13 +38,13 @@ public class CategoryController {
 	}
 
 	@GetMapping(path = "/category/{categoryId}")
-	public ResponseEntity<Object> getProductById(@PathVariable(name = "categoryId") int categoryId){
+	public ResponseEntity<Object> getProductByCategoryId(@PathVariable(name = "categoryId") int categoryId){
 		LOGGER.debug("/api/category/" + categoryId + " --- START");
-		LOGGER.debug("CategoryController.getProductById(" + categoryId + ") --- START");
-		LOGGER.info("CategoryController.getProductById(" + categoryId + ") --- retrieving products, ");
-		CategoryBean categoryBean = categoryService.getDairyProducts(categoryId);
-		LOGGER.info("CategoryController.getProductById(" + categoryId + ") --- products are, " + categoryBean);
-		LOGGER.debug("CategoryController.getProductById(" + categoryId + ") --- END");
+		LOGGER.debug("CategoryController.getProductByCategoryId(" + categoryId + ") --- START");
+		LOGGER.info("CategoryController.getProductByCategoryId(" + categoryId + ") --- retrieving products, ");
+		CategoryBean categoryBean = categoryService.getProductByCategoryId(categoryId);
+		LOGGER.info("CategoryController.getProductByCategoryId(" + categoryId + ") --- products are, " + categoryBean);
+		LOGGER.debug("CategoryController.getProductByCategoryId(" + categoryId + ") --- END");
 		LOGGER.debug("/api/category/" + categoryId + " --- END");
 		return ResponseEntity.ok(categoryBean);
 	}
