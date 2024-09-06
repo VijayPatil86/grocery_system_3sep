@@ -17,4 +17,10 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Intege
 		       + "AND c.categoryAvailable = 'Y' "
 		       + "AND d.dairyProductAvailable = 'Y'")
 	CategoryEntity findDairyProductByCategoryId(@Param(value = "categoryId") int categoryId);
+
+	@Query("SELECT c FROM CategoryEntity c LEFT JOIN FETCH c.bakeryProductEntities b "
+		       + "WHERE c.categoryId = :categoryId "
+		       + "AND c.categoryAvailable = 'Y' "
+		       + "AND b.bakeryProductAvailable = 'Y'")
+	CategoryEntity findBakeryProductByCategoryId(@Param(value = "categoryId") int categoryId);
 }
