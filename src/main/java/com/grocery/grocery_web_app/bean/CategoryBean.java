@@ -1,5 +1,7 @@
 package com.grocery.grocery_web_app.bean;
 
+import java.util.List;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,5 +11,5 @@ import lombok.ToString;
 public class CategoryBean {
 	private int categoryId;
 	private String categoryName;
-	private String categoryAvailable;
+	private List<DairyProductBean> dairyProductBeans;
 }
