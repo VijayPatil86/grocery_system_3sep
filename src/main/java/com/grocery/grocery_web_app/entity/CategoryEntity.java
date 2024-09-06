@@ -35,4 +35,8 @@ public class CategoryEntity {
 	@OneToMany
 	@JoinColumn(name = "CATEGORY_ID")
 	private List<DairyProductEntity> dairyProductEntities;
+
+	@OneToMany
+	@JoinColumn(name = "CATEGORY_ID")
+	private List<BakeryProductEntity> bakeryProductEntities;
 }
