@@ -49,10 +49,20 @@ public class CategoryController {
 		LOGGER.debug("CategoryController.getProductByCategoryId(" + categoryId + ") --- START");
 		LOGGER.info("CategoryController.getProductByCategoryId(" + categoryId + ") --- retrieving products, ");
 		CategoryBean categoryBean = categoryService.getProductByCategoryId(categoryId);
+		LOGGER.debug("CategoryController.getProductByCategoryId() --- calling CategoryController.addHateoasLinkToCategoryBean()");
+		categoryBean = addHateoasLinkToCategoryBean(categoryBean);
 		LOGGER.info("CategoryController.getProductByCategoryId(" + categoryId + ") --- products are, " + categoryBean);
 		LOGGER.debug("CategoryController.getProductByCategoryId(" + categoryId + ") --- END");
 		LOGGER.debug("/api/category/" + categoryId + " --- END");
 		return ResponseEntity.ok(categoryBean);
+	}
+
+	private CategoryBean addHateoasLinkToCategoryBean(CategoryBean categoryBean) {
+		LOGGER.debug("CategoryController.addHateoasLinkToCategoryBean() --- START");
+		categoryBean.add(linkTo(methodOn(CategoryController.class).getProductByCategoryId(categoryBean.getCategoryId())).withSelfRel());
+		categoryBean.add(linkTo(methodOn(CategoryController.class).getAllAvailableCategories()).withRel("href_allCategories"));
+		LOGGER.debug("CategoryController.addHateoasLinkToCategoryBean() --- END");
+		return categoryBean;
 	}
 
 	private CollectionModel<CategoryBean> addHateoasLinksToAllAvailableCategoriesBeans(List<CategoryBean> allAvailableCategoriesBeans) {
